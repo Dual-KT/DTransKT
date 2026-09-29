@@ -1,0 +1,10 @@
+{
+  "source": "algebra2005",
+  "targets": ["assist2015", "dbe-kt22"],
+  "dbe_text_file": "output/data1.txt",
+  "min_seq_len": 3,
+  "maxlen": 200,
+  "kfold": 5,
+  "fusion": "Replace inputs with CG-mapped data and CA-enhanced texts without changing backbones.",
+  "env": "Ubuntu 20.04, CUDA 11.7, PyTorch 1.13.1"
+}

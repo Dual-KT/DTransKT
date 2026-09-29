@@ -1,0 +1,7 @@
+{
+  "temperature": 0.8,
+  "pooling": "cls",
+  "max_length": 128,
+  "bert_path": "./Bert",
+  "cache_dir": "cache"
+}

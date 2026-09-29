@@ -2,6 +2,28 @@
 
 Knowledge Tracing (KT) is pivotal in intelligent tutoring systems, as it models the dynamic evolution of students' knowledge states based on their learning interactions. However, the cross-disciplinary generalization of existing KT models is subjected to a dual constraint: the heterogeneity in students' cognitive abilities and the divergent domain-specific knowledge structures. To address this challenge, we propose DTransKT, a dual transferable knowledge tracing framework tailored for cross-disciplinary adaptability. DTransKT enhances existing knowledge tracing models by dynamically aligning student representations and integrating external knowledge semantics. Specifically, the framework incorporates a Cross-disciplinary Graph-matching (CG) module, which captures meta-skill representations based on students' learning trajectories. Through cross-disciplinary node matching, the CG module aligns student-specific features, thereby improving tracing accuracy. Additionally, the Cross-disciplinary Attention-assisting (CA) module leverages pre-trained language models to extract meta-knowledge semantics from textual content, enhancing transferability. Comprehensive experimental evaluations demonstrate that DTransKT consistently enhances the performance of seven prominent KT models under direct transfer settings, achieving average improvements of 14.2% in accuracy (ACC) and 4.5% in area under the curve (AUC) across diverse datasets. These findings affirm the efficacy of our approach in enabling cross-disciplinary knowledge tracing transfer.
 
+## Environment
+
+- Reference environment: Ubuntu 20.04, CUDA 11.7, PyTorch 1.13.1.
+- Apple Silicon: use MPS when available; set `KMP_DUPLICATE_LIB_OK=TRUE OMP_NUM_THREADS=1` for torch and faiss compatibility.
+- Dependencies: see `requirements-dtranskt.txt`.
+
+## Usage
+
+```bash
+pip install -r requirements-dtranskt.txt
+python examples/reproduce_cg.py --source_txt ../data/source/data.txt --target_txt ../data/target/data.txt --top_k 3 --epochs 150
+python examples/reproduce_ca.py --source_txt ../data/source/data.txt --target_txt ../data/target/data.txt --temperature 0.8 --output ../data/output.txt
+python examples/online_map_example.py
+```
+
+Reference configurations are provided in `configs/cg_reference.json`, `configs/ca_reference.json`, and `configs/dtranskt_reference.json`.
+
+## Notes
+
+- This repository is a reference fork of pykt-team/pykt-toolkit for cross-disciplinary transfer experiments.
+- Historical absolute paths in `examples/extract_*` are legacy examples and are not required for reproduction.
+
 ## References
 ### Projects
 

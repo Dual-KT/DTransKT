@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+logs/
+cache/
+*.npy
+*.index
+GAP_*/
+GAP_model_ad/
+data3.txt
+*.pkl
+.DS_Store
+.venv/

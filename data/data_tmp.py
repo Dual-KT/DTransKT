@@ -2,31 +2,27 @@ from typing import List, Dict
 import pandas as pd
 
 def read_txt_in_blocks(file_path: str) -> List[Dict]:
-    """
-    按块读取文本文件，每6行组成一条完整记录
-    :param file_path: 文本文件路径
-    :return: 包含所有记录的列表，每条记录为字典
-    """
+    """Read six-line blocks from a data file and return student interaction records."""
     data = []
     with open(file_path, 'r', encoding = 'utf-8') as f:
         while True:
-            # 读取6行组成一条完整记录
+            # Read six lines as one complete interaction record.
             lines = [f.readline().strip() for _ in range(6)]
 
-            # 检查是否到达文件末尾
-            if all(not line for line in lines):  # 全为空行
+            # Stop at the end of the file.
+            if all(not line for line in lines):  # All lines empty.
                 break
 
-            # 过滤空行并解析
+            # Parse each block into a record.
             try:
-                # 解析每行数据
+                # Parse user, problems, skills, answers, and timing fields.
                 user_info = lines[0]
                 seq_problems = lines[1]
                 seq_skills = lines[2]
                 seq_ans = lines[3]
                 seq_start_time = lines[4]
                 seq_response_cost = lines[5]
-                # 构建记录字典
+                # Build a record dictionary for one student.
                 record = {
                     'user': user_info.split(',')[0],
                     'seq_len': int(user_info.split(',')[1]),
@@ -39,9 +35,9 @@ def read_txt_in_blocks(file_path: str) -> List[Dict]:
                 data.append(record)
 
             except Exception as e:
-                # 打印错误信息并跳过当前块
-                print(f"解析错误: {e}")
-                print(f"错误行: {lines}")
+                # Report parsing errors and skip the current block.
+                print(f"parse error: {e}")
+                print(f"failed lines: {lines}")
                 continue
 
     data = pd.DataFrame(data)
